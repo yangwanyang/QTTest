@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_modelTableView = nullptr;
     qDebug() <<"";
     qDebug() <<"";
+    qDebug() <<"";
 }
 
 MainWindow::~MainWindow()
