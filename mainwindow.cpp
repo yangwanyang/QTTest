@@ -11,9 +11,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     m_modelTableView = nullptr;
-    qDebug() <<"";
-    qDebug() <<"";
-    qDebug() <<"";
 }
 
 MainWindow::~MainWindow()
