@@ -53,9 +53,11 @@ void CWidgetMenu::mousePressEvent(QMouseEvent *event)
 void CWidgetMenu::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
+    painter.setRenderHint(QPainter::Antialiasing);
     painter.setPen(Qt::red);
     painter.drawRect(10, 10, 100, 200);
     painter.drawText(20, 40, QStringLiteral("菜单区域"));
+
 
 //    QPainter painter(this);
 //    painter.setWindow(0, 0, 200, 200);

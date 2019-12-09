@@ -43,16 +43,3 @@ void CWidgetEvent::mousePressEvent(QMouseEvent* event)
     }
 }
 
-bool CWidgetEvent::notify(QObject *obj,QEvent *event)
-{
-    if(event->type()==QEvent::KeyPress)
-    {
-        QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
-        if(keyEvent->key() == Qt::Key_B)
-        {
-            ui->plainTextEditLog->appendPlainText(QString("keyDwon:Key_B"));
-            ui->plainTextEditLog->moveCursor(QTextCursor::End);
-        }
-    }
-    return QApplication::notify(obj, event);
-}

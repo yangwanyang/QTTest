@@ -23,7 +23,6 @@ protected:
     bool event(QEvent *event); //事件处理方式1：重写虚函数QObject::event()
     void mousePressEvent(QMouseEvent* e); //事件处理方式2：重写QWidget类中的此虚函数
     void keyPressEvent(QKeyEvent *event);
-    bool notify(QObject *obj, QEvent *event);
 
 
 private:
