@@ -98,7 +98,6 @@ void CWidgetMedia::DurationChanged(qint64 duration)
     //视频总时长  毫秒
     m_duration = duration / 1000;
     ui->hSlider->setMaximum(static_cast<int>(m_duration));
-//    qDebug() << QStringLiteral("总时长：%1秒").arg(m_duration);
 }
 
 void CWidgetMedia::PositionChanged(qint64 progress)

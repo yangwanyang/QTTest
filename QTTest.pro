@@ -31,6 +31,7 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     mywebchannel.cpp \
+    widgetdrop.cpp \
     widgetevent.cpp \
     widgethttp.cpp \
     widgetmap.cpp \
@@ -45,6 +46,7 @@ SOURCES += \
 HEADERS += \
         mainwindow.h \
     mywebchannel.h \
+    widgetdrop.h \
     widgetevent.h \
     widgethttp.h \
     widgetmap.h \
@@ -58,6 +60,7 @@ HEADERS += \
 
 FORMS += \
         mainwindow.ui \
+    widgetdrop.ui \
     widgetevent.ui \
     widgethttp.ui \
     widgetmap.ui \

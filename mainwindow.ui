@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidgetTree">
       <property name="currentIndex">
-       <number>10</number>
+       <number>11</number>
       </property>
       <widget class="QWidget" name="tabMySQL">
        <attribute name="title">
@@ -188,7 +188,7 @@
         <string>右键菜单</string>
        </attribute>
       </widget>
-      <widget class="CWidgetProblem" name="tab_8">
+      <widget class="CWidgetProblem" name="tabSuanFa">
        <attribute name="title">
         <string>算法</string>
        </attribute>
@@ -206,6 +206,11 @@
       <widget class="CWidgetEvent" name="tabEvent">
        <attribute name="title">
         <string>事件</string>
+       </attribute>
+      </widget>
+      <widget class="CWidgetDrop" name="tabDrop">
+       <attribute name="title">
+        <string>文件拖放</string>
        </attribute>
       </widget>
      </widget>
@@ -292,6 +297,12 @@
    <class>CWidgetEvent</class>
    <extends>QWidget</extends>
    <header>widgetevent.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>CWidgetDrop</class>
+   <extends>QWidget</extends>
+   <header>widgetdrop.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
