@@ -8,10 +8,14 @@ QT       += core gui sql
 QT  += multimedia multimediawidgets
 QT  += webenginewidgets webchannel webengine
 QT  += network
+QT  += quick qml
+QT  += quickwidgets
+QT  += xml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = QTTest
+DESTDIR     = $$PWD/../QTTest/bin
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -37,6 +41,8 @@ SOURCES += \
     widgetmap.cpp \
     widgetmenu.cpp \
     widgetproblem.cpp \
+    widgetqml.cpp \
+    widgetqss.cpp \
     widgettcpclient.cpp \
     widgettcpserver.cpp \
     widgettreeview.cpp \
@@ -52,6 +58,8 @@ HEADERS += \
     widgetmap.h \
     widgetmenu.h \
     widgetproblem.h \
+    widgetqml.h \
+    widgetqss.h \
     widgettcpclient.h \
     widgettcpserver.h \
     widgettreeview.h \
@@ -66,6 +74,8 @@ FORMS += \
     widgetmap.ui \
     widgetmenu.ui \
     widgetproblem.ui \
+    widgetqml.ui \
+    widgetqss.ui \
     widgettcpclient.ui \
     widgettcpserver.ui \
     widgettreeview.ui \
@@ -81,3 +91,8 @@ win32: LIBS += -L'C:/Program Files (x86)/Windows Kits/10/Lib/10.0.17763.0/um/x86
 
 INCLUDEPATH += 'C:/Program Files (x86)/Windows Kits/10/Include/10.0.17763.0/um'
 DEPENDPATH += 'C:/Program Files (x86)/Windows Kits/10/Include/10.0.17763.0/um'
+
+RESOURCES += \
+    Resource.qrc
+
+DISTFILES +=

@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidgetTree">
       <property name="currentIndex">
-       <number>11</number>
+       <number>13</number>
       </property>
       <widget class="QWidget" name="tabMySQL">
        <attribute name="title">
@@ -99,7 +99,11 @@
          </widget>
         </item>
         <item row="2" column="0" colspan="5">
-         <widget class="QTableView" name="tableView_2"/>
+         <widget class="QTableView" name="tableView_2">
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+         </widget>
         </item>
         <item row="0" column="0">
          <widget class="QPushButton" name="btnTableViewInit">
@@ -213,6 +217,16 @@
         <string>文件拖放</string>
        </attribute>
       </widget>
+      <widget class="CWidgetQML" name="tabQML">
+       <attribute name="title">
+        <string>QML</string>
+       </attribute>
+      </widget>
+      <widget class="CWidgetQSS" name="tabQSS">
+       <attribute name="title">
+        <string>QSS</string>
+       </attribute>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -303,6 +317,18 @@
    <class>CWidgetDrop</class>
    <extends>QWidget</extends>
    <header>widgetdrop.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>CWidgetQML</class>
+   <extends>QWidget</extends>
+   <header>widgetqml.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>CWidgetQSS</class>
+   <extends>QWidget</extends>
+   <header>widgetqss.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
