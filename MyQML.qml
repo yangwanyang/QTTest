@@ -106,7 +106,7 @@ Rectangle {
 }
 */
 
-
+/*
 //堆叠顺序
 Rectangle {
     id: rect0; width: 400; height: 400; color: "black"
@@ -136,7 +136,404 @@ Rectangle {
         }
     }
 }
+*/
 
+/*
+//Text
+Rectangle {
+    width: 200; height: 200; color: "lightgreen"
+    FontLoader {id:fixedFont; name:"Courier"}
+    Text {
+        width: 100; height: 100; x: 50; y: 50;
+        color: "red"
+
+        font.family: fixedFont.name
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
+        //文本换行
+        wrapMode: Text.WordWrap
+        //链接信号 link表示被单击时的连接
+        textFormat: Text.RichText
+        text: "<a href = \"http://www.baidus.com\">here</a>"
+        onLinkActivated: console.log(link+" link activated")
+    }
+}
+*/
+
+/*
+//TextEdit TextInput
+Column {
+    Text {
+        id: name
+        text: qsTr("<b>Hello</b> <i>World!</i>")
+    }
+    TextEdit {
+        width: 200
+        text: qsTr("<b>Hello</b> <i>World!</i>")
+        font.family: "Helvetica"
+        font.pointSize: 20;
+        color: "blue"
+        focus: true
+    }
+    TextInput {
+        width: 50; height: 50
+        validator: IntValidator{ bottom: 11; top: 31;}
+        focus: true
+    }
+}
+*/
+
+/*
+//鼠标点击、拖拽、按键等
+Rectangle {
+    id: rect
+    width: 400; height: 400; color: "#e8dedc"
+
+    Rectangle {
+        id: btn
+        x: 10; y: 10; width: 80; height: 30; color: "#1cf39a"
+        focus: true
+        //透明度
+        opacity: (rect.width - btn.x)/rect.width
+        Text {
+            anchors.fill: parent
+            text: qsTr("Button")
+            color: "#000000"
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+        }
+        MouseArea {
+            anchors.fill: parent
+            drag.target: btn
+            drag.axis: Drag.XandYAxis
+            drag.minimumX: 0
+            drag.maximumX: rect.width - btn.width
+            drag.minimumY: 0
+            drag.maximumY: rect.height - btn.height
+            acceptedButtons: Qt.LeftButton | Qt.RightButton
+            onClicked: {
+                if (mouse.button === Qt.LeftButton)
+                {
+                    parent.color = "blue"
+                }
+                else if ((mouse.button === Qt.RightButton) && (mouse.modifiers & Qt.ShiftModifier))
+                {
+                    parent.color = "red"
+                }
+                else
+                {
+                    parent.color = "#1cf39a";
+                }
+            }
+        }
+        Keys.onPressed: {
+            if (event.key === Qt.Key_D)
+            {
+                btn.x += 2;
+            }
+            if (event.key === Qt.Key_A)
+            {
+                btn.x -= 2;
+            }
+            if (event.key === Qt.Key_S)
+            {
+                btn.y += 2;
+            }
+            if (event.key === Qt.Key_W)
+            {
+                btn.y -= 2;
+            }
+            //event.accepted设置为true可以防止事件向上层传播
+            event.accepted = true;
+        }
+    }
+}
+*/
+
+/*
+//方向键
+Grid {
+    width: 100; height: 400;
+    columns: 2
+
+    Rectangle {
+        id: topLeft
+        width: 50; height: 50;
+        color: focus ? "red" : "lightgray"
+        focus: true
+        KeyNavigation.right: topRight
+        KeyNavigation.down: bottomLeft
+    }
+    Rectangle {
+        id: topRight
+        width: 50; height: 50;
+        color: focus ? "red" : "lightgray"
+        KeyNavigation.left: topLeft
+        KeyNavigation.down: bottomRight
+    }
+    Rectangle {
+        id: bottomLeft
+        width: 50; height: 50;
+        color: focus ? "red" : "lightgray"
+        KeyNavigation.right: bottomRight
+        KeyNavigation.up: topLeft
+    }
+    Rectangle {
+        id: bottomRight
+        width: 50; height: 50;
+        color: focus ? "red" : "lightgray"
+        KeyNavigation.left: bottomLeft
+        KeyNavigation.up: topRight
+    }
+}
+*/
+
+/*
+//定时器
+Rectangle {
+    Timer {
+        interval: 500; running: true; repeat: true
+        onTriggered: time.text = Date().toString()
+    }
+    Text {id: time; styleColor: "#f70c0c"}
+}
+*/
+
+/*
+//渐变
+Rectangle {
+    width: 100; height: 400;
+    gradient: Gradient {
+        GradientStop { position: 0.0; color: "red" }
+        GradientStop { position: 0.3; color: "yellow" }
+        GradientStop { position: 1.0; color: "green" }
+    }
+}
+*/
+
+/*
+//图片、gif
+Grid
+{
+    height: 400
+    columns: 2
+    Image {
+        id: image
+        width: 120; height: 120
+        fillMode: Image.PreserveAspectFit
+        source: "http://www.baidu.com/img/bd_logo1.png"
+        onStatusChanged: {
+            if (image.status == Image.Ready) console.log("Loaded")
+            else if (image.status === Image.Loading) console.log("Loading")
+        }
+    }
+    //九宫格分割
+    BorderImage {
+        id: borderImage
+        source: "http://www.baidu.com/img/bd_logo1.png"
+        width: 200; height: 120
+        border.left: 30; border.top: 30
+        border.right: 30; border.bottom: 30
+        horizontalTileMode: BorderImage.Stretch
+        verticalTileMode: BorderImage.Stretch
+    }
+    //Gig
+    Rectangle {
+        id: rect
+        width: animation.width; height: animation.height+8; color: "#c2f3a5"
+        AnimatedImage { id: animation; width:120; height: 120; source: "file:///E:/ywy/work/QT/test/QTTest/QSS/Gig.gif"
+        }
+        Rectangle {
+            property int frames: animation.frameCount
+            width: 4; height: 8;
+            x: (animation.width-width) * animation.currentFrame / frames
+            y: animation.height
+            color: "red"
+        }
+    }
+}
+*/
+
+/*
+//缩放、旋转
+Grid {
+    height: 400
+    columns: 4
+    spacing: 5
+    Rectangle {
+        width: 50; height: 50; color: "#789011"
+        gradient: Gradient {
+            GradientStop { position: 0.0; color: "red" }
+            GradientStop { position: 0.3; color: "yellow" }
+            GradientStop { position: 1.0; color: "green" }
+        }
+    }
+    Rectangle {
+        width: 50; height: 50; color: "#d73636"
+        scale: 1.3 //放大
+        transformOrigin: "TopLeft"
+    }
+    Rectangle {
+        width: 50; height: 50; color: "#3bc863"
+        scale: 0.7 //缩小
+        transformOrigin: "TopLeft"
+    }
+    Rectangle {
+        width: 50; height: 50; color: "#aabbcc"
+        scale: -1   //镜像
+        gradient: Gradient {
+            GradientStop { position: 0.0; color: "red" }
+            GradientStop { position: 0.3; color: "yellow" }
+            GradientStop { position: 1.0; color: "green" }
+        }
+    }
+    Rectangle {
+        width: 50; height: 50; color: "#6565ec"
+        transform: Rotation {
+            origin.x: 30; origin.y: 30;
+            axis {x:1; y: 1; z: 0;} angle: 72
+        }
+    }
+}
+*/
+
+/*
+//状态
+Rectangle {
+    width: 400; height: 400;
+    Rectangle {
+        id: myRect
+        width: 50; height: 50; color: "red";
+        MouseArea {
+            anchors.fill: parent
+            onClicked: myRect.state = "moved"
+        }
+        states: [
+            State {
+                name: "moved"
+                PropertyChanges {
+                    target: myRect;
+                    x: 50; y: 50;
+                }
+            }
+        ]
+    }
+}
+*/
+
+/*
+//动画
+Rectangle {
+    height: 400
+    Rectangle {
+        width: 100; height: 100; color: "red"
+        PropertyAnimation on x {from: 0; to: 150; duration: 1000; loops: Animation.Infinite }
+        PropertyAnimation on y {from: 0; to: 150; duration: 1000; loops: Animation.Infinite }
+    }
+    Rectangle {
+        id: rect
+        width: 50; height: 50; color: "lightgreen"; anchors.centerIn: parent
+        //属性发生改变时触发该动画
+        Behavior on x { PropertyAnimation {duration: 500} }
+        Behavior on y { PropertyAnimation {duration: 500} }
+        //颜色变化
+        ColorAnimation on color { from: "lightgreen"; to: "red";
+            duration: 2000
+            loops: Animation.Infinite
+        }
+        //旋转动画
+        RotationAnimation on rotation { to: 135; duration: 2000; direction: RotationAnimation.Clockwise; loops: Animation.Infinite }
+    }
+    MouseArea {
+        anchors.fill: parent
+        onClicked: {rect.x = mouse.x; rect.y = mouse.y }
+    }
+}
+*/
+
+/*
+//组合动画
+Rectangle {
+    id: rect
+    height: 400
+    Rectangle {
+        id: img
+        width: 50; height: 50; color: "red"
+        anchors.horizontalCenter: parent.horizontalCenter
+        y: 0
+
+        SequentialAnimation on y {
+            loops: Animation.Infinite
+            NumberAnimation { to: rect.height - img.height; easing.type: Easing.OutBounce; duration: 2000 }
+            PauseAnimation  { duration: 1000 }
+            NumberAnimation { to: 0; easing.type: Easing.OutQuad; duration: 1000 }
+        }
+    }
+}
+*/
+
+/*
+//嵌套动画(顺序、并行)
+Rectangle {
+    id: redRect
+    width: 100; height: 100; color: "red"
+
+    MouseArea { id: mouseArea; anchors.fill: parent }
+    states: State {
+        name: "pressed"; when: mouseArea.pressed
+        PropertyChanges {
+            target: redRect; color: "blue";
+            y: mouseArea.mouseY; width: mouseArea.mouseX
+        }
+    }
+    transitions: Transition {
+        SequentialAnimation {
+            //顺序动画
+            ColorAnimation { duration: 200 }
+            PauseAnimation { duration: 100 }
+            //并行动画
+            ParallelAnimation {
+                NumberAnimation {
+                    duration: 500
+                    easing.type: Easing.OutBounce
+                    targets: redRect
+                    properties: "y"
+                }
+                NumberAnimation {
+                    duration: 800
+                    easing.type: Easing.InOutQuad
+                    targets: redRect
+                    properties: "width"
+                }
+            }
+        }
+    }
+}
+*/
+
+//视图
+Item
+{
+    width: 200; height: 250;
+    ListModel {
+        id: myModel
+        ListElement { type: "Dog"; age: 8 }
+        ListElement { type: "Cat"; age: 5 }
+    }
+    Component {
+        id: myDelegate
+        Text { text: type + "," + age }
+    }
+    ListView {
+        anchors.fill: parent
+        model: myModel
+//        delegate: myDelegate
+        delegate: Row {
+            Text { text: "type:" + type }
+            Text { text: "age:" + age }
+        }
+    }
+}
 
 //测试
 //Rectangle {

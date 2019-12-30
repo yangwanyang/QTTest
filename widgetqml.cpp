@@ -19,12 +19,12 @@ CWidgetQML::CWidgetQML(QWidget *parent) :
     //ui->quickWidget->setClearColor(QColor(Qt::transparent));
 
     // QML 与 Qt Widgets 通信
-    QObject *pRoot = static_cast<QObject*>(ui->quickWidget->rootObject());
-    if (pRoot != nullptr)
-    {
+//    QObject *pRoot = static_cast<QObject*>(ui->quickWidget->rootObject());
+//    if (pRoot != nullptr)
+//    {
 //        connect(pRoot, SIGNAL(qmlSignal(int, QString)), this, SLOT(receiveFromQml(int, QString)));
 //        connect(ui->pushButton, SIGNAL(clicked(bool)), pRoot, SIGNAL(cSignal()));
-    }
+//    }
 }
 
 CWidgetQML::~CWidgetQML()

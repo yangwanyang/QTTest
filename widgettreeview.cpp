@@ -23,7 +23,7 @@ CWidgetTreeView::CWidgetTreeView(QWidget *parent) :
     //表头添加勾选框
     QHeaderView* pHeader = ui->treeWidget->header();
     QWidget* pWidget = static_cast<QWidget*>(pHeader);
-    qDebug() << pWidget->geometry();
+//    qDebug() << pWidget->geometry();
     m_pCheckBoxAll = new QCheckBox(pWidget);
     m_pCheckBoxAll->setGeometry(4,9,13,13);
     m_pCheckBoxAll->setObjectName("checkBoxAll");
@@ -45,6 +45,5 @@ void CWidgetTreeView::on_listWidget_itemClicked(QListWidgetItem *item)
 
 void CWidgetTreeView::SlotSliderMoved(int value)
 {
-    qDebug() << value;
     m_pCheckBoxAll->setGeometry(4-value,9,13,13);
 }
