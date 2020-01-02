@@ -4,5 +4,8 @@
     </qresource>
     <qresource prefix="/qss">
         <file>QSS/widgetqss.qss</file>
+        <file>QSS/5_heart.png</file>
+        <file>QSS/9_club.png</file>
+        <file>QSS/back.png</file>
     </qresource>
 </RCC>

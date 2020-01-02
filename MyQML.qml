@@ -1,4 +1,7 @@
 ﻿import QtQuick 2.0
+import QtQuick.XmlListModel 2.0
+import QtWebEngine 1.0
+
 /*
 //列布局
 Column {
@@ -511,6 +514,7 @@ Rectangle {
 }
 */
 
+/*
 //视图
 Item
 {
@@ -534,34 +538,132 @@ Item
         }
     }
 }
+*/
+
+/*
+//翻转动画
+Flipable {
+    id: flipable
+    width: 240; height: 240
+    property bool flipped: false
+//    front: Image { source: "qrc:/qss/QSS/5_heart.png"; anchors.centerIn: parent}
+    front: Image { id: img; source: "file:./../QSS/5_heart.png"; anchors.centerIn: parent}
+    back: Image { source: "file:./../QSS/back.png"; anchors.centerIn: parent}
+    transform: Rotation {
+        id: rotation
+        origin.x: flipable.width/2
+        origin.y: flipable.height/2
+        axis.x: 0; axis.y: 1; axis.z: 0
+        angle: 0
+    }
+    states: State {
+        name: "back"
+        PropertyChanges {
+            target: rotation; angle: 180
+        }
+        when: flipable.flipped
+    }
+    transitions: Transition {
+//        NumberAnimation { target: rotation; property: "angle"; duration: 2000}
+        ParallelAnimation {
+            NumberAnimation { target: rotation; properties: "angle"; duration: 600 }
+            SequentialAnimation {
+                NumberAnimation { target: flipable; property: "scale"; to: 0.75; duration: 300 }
+                NumberAnimation { target: flipable; property: "scale"; to: 1.0; duration: 300 }
+            }
+        }
+    }
+    MouseArea{
+        anchors.fill: parent
+        onClicked: { flipable.flipped = !flipable.flipped }
+    }
+}
+*/
+
+/*
+//XmlListModel
+Rectangle {
+    width: 360; height: 360; color: "lightgreen"
+
+    XmlListModel {
+        id: feedModel
+        source: "file:./../QSS/test.xml"
+        query: "/videos/video"
+        XmlRole { name: "name"; query: "@name/string()" }
+        XmlRole { name: "date"; query: "@date/string()" }
+        XmlRole { name: "DY_tag"; query: "attr[1]/@tag/string()" }
+        XmlRole { name: "DY"; query: "attr[1]/string()" }
+        XmlRole { name: "YU_tag"; query: "attr[2]/@tag/string()" }
+        XmlRole { name: "YU"; query: "attr[2]/string()" }
+        XmlRole { name: "PF_tag"; query: "attr[3]/@tag/string()" }
+        XmlRole { name: "PF"; query: "attr[3]/string()" }
+        XmlRole { name: "JJ_tag"; query: "attr[4]/@tag/string()" }
+        XmlRole { name: "JJ"; query: "attr[4]/string()" }
+    }
+    ListView
+    {
+        anchors.fill: parent
+        model: feedModel
+        delegate: Column {
+            Text { text: name }
+            Text { text: date }
+            Text { text: DY_tag + ": " + DY }
+            Text { text: YU_tag + ": " + YU }
+            Text { text: PF_tag + ": " + PF }
+            Text { text: JJ_tag + ": " + JJ }
+        }
+        highlight: Rectangle { color: "lightsteelblue"; radius: 5 }
+        focus: true;
+    }
+    MouseArea {
+        anchors.fill: parent
+        onClicked: { console.log(feedModel.status)
+        console.log(feedModel.errorString())
+        }
+    }
+}
+*/
+
+/*
+//网页
+Flickable {
+    width: 400; height: 300
+    contentWidth: webView.width; contentHeight: webView.height
+
+    WebEngineView {
+        id: webView
+        url: "https://www.baidu.com/"
+    }
+}
+*/
 
 //测试
-//Rectangle {
-//    id: root
-//    color: "green"
-//    width: 200
-//    height: 200
+Rectangle {
+    id: root
+    color: "green"
+    width: 200
+    height: 200
 
-//    // 发送给 Qt Widgets 的信号
-//    signal qmlSignal(int number, string str)
-//    // 从 Qt Widgets 接收到的信号
-//    signal cSignal
+    // 发送给 Qt Widgets 的信号
+    signal qmlSignal(int number, string str)
+    // 从 Qt Widgets 接收到的信号
+    signal cSignal
 
-//    Text {
-//        id: myText
-//        text: "Click me"
-//        font.pointSize: 14
-//        anchors.centerIn: parent
-//    }
+    Text {
+        id: myText
+        text: "Click me"
+        font.pointSize: 14
+        anchors.centerIn: parent
+    }
 
-//    MouseArea {
-//        anchors.fill: parent
-//        onClicked: root.qmlSignal(1, "FROM QML")
-//    }
+    MouseArea {
+        anchors.fill: parent
+        onClicked: root.qmlSignal(1, "FROM QML")
+    }
 
-//    // 信号处理程序（处理从 Qt Widgets 接收到的信号）
-//    onCSignal: {
-//        //root.color = "blue"
-//        myText.text = "Call the qml signal handler"
-//    }
-//}
+    // 信号处理程序（处理从 Qt Widgets 接收到的信号）
+    onCSignal: {
+        //root.color = "blue"
+        myText.text = "Call the qml signal handler"
+    }
+}
